@@ -11,8 +11,7 @@ namespace ChilLaxBackEnd.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,8 +31,6 @@ namespace ChilLaxBackEnd.Models
         public int product_quantity { get; set; }
         public string product_category { get; set; }
         public bool product_state { get; set; }
-
-        public HttpPostedFileBase photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }

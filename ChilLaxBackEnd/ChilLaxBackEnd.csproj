@@ -500,8 +500,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\ChilLaxModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
       <LastGenOutput>ChilLaxModel.Context.cs</LastGenOutput>
+      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
     </Content>
     <Content Include="Models\ChilLaxModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -566,6 +566,13 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ChilLaxModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChilLaxModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ChilLaxModel.edmx.diagram">
+      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -616,7 +623,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChilLaxModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelWrappers\AnnouncementWrapper.cs" />
     <Compile Include="Models\CustomerService.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
@@ -629,17 +635,18 @@
     <Compile Include="Models\FocusSlide.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelWrappers\FocusSlideWrapper.cs" />
     <Compile Include="Models\HomeVideo.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelWrappers\HomeVideoWrapper.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MemberCredential.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelWrappers\AnnouncementWrapper.cs" />
+    <Compile Include="Models\ModelWrappers\FocusSlideWrapper.cs" />
+    <Compile Include="Models\ModelWrappers\HomeVideoWrapper.cs" />
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
@@ -661,16 +668,7 @@
     <Compile Include="Models\sp_get_announcement_by_date_Result.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Supplier.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TarotCard.cs">
@@ -723,13 +721,6 @@
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.ttf" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.woff" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernoted41d.eot" />
-    <EntityDeploy Include="Models\ChilLaxModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ChilLaxModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ChilLaxModel.edmx.diagram">
-      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
