@@ -17,7 +17,6 @@ namespace ChilLaxBackEnd.Models
         public int member_id { get; set; }
         public string member_account { get; set; }
         public string member_password { get; set; }
-        public bool available { get; set; }
     
         public virtual Member Member { get; set; }
     }
