@@ -50,30 +50,7 @@ namespace ChilLaxBackEnd.Controllers
 
 			return View(productOrderDetails);
 		}
-		//public ActionResult Index(int nowpage, int pageCount)
-		//{
-
-		//    ChilLaxEntities db = new ChilLaxEntities();
-
-		//    List<ProductOrderDetail> productOrderDetails = db
-		//        .ProductOrder
-		//        .OrderByDescending(p => p.order_date)
-		//        .Skip(10 * ((int)nowpage) - 1)
-		//        .Take(10)
-		//        .Join(db.OrderDetail,
-		//            po => po.order_id,
-		//            od => od.order_id,
-		//            (po, od) => new ProductOrderDetail
-		//            {
-		//                ProductOrder = po,
-		//                OrderDetail = od
-		//            }).ToList();
-
-		//    productOrderDetails.FirstOrDefault().nowpage = nowpage;
-		//    productOrderDetails.FirstOrDefault().pageCount = pageCount;
-
-		//    return View(productOrderDetails);
-		//}
+		
 
 		// GET: Purchas/Details/5
 		public ActionResult Details(int id)
