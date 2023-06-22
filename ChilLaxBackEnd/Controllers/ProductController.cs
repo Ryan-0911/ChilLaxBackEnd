@@ -101,9 +101,5 @@ namespace ChilLaxBackEnd.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult Details()
-        {
-            return View();
-        }
     }
 }

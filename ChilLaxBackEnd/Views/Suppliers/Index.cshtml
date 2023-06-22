@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ChilLaxBackEnd.Models.Supplier>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>廠商資料一覽表</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        關鍵字 @Html.TextBox("txtKeyword")
+        <input type="submit" value="查詢" />
+    </p>
+}
+
+<br />
+<div class="create_supplier">
+    @Html.ActionLink("新增廠商", "Create")
+</div>
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>
+            廠商名稱
+        </th>
+        <th>
+            聯絡電話
+        </th>
+        <th>
+            通訊地址
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        int count = 0;
+        foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.supplier_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.supplier_tel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.supplier_address)
+                </td>
+                <td>
+                    @Html.ActionLink("修改", "Edit", "Supplier", new { id = item.supplier_id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("刪除", "Delete", "Supplier", new { id = item.supplier_id }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+
+                </td>
+            </tr>
+        }
+    }
+
+</table>

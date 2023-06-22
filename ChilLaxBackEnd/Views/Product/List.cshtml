@@ -109,8 +109,6 @@
                 <td>
                     @Html.ActionLink("修改", "Edit", "Product", new { id = item.product_id },
                                   new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("詳細說明", "Details", "Product", new { id = item.product_id },
-                                  new { @class = "btn btn-info" }) |
                     @Html.ActionLink("刪除", "Delete", "Product", new { id = item.product_id },
                              new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
                 </td>
