@@ -1,4 +1,4 @@
-﻿@model ChilLaxBackEnd.Models.Employee
+﻿@model ChilLaxBackEnd.Models.ViewModels.EmployeeViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -7,7 +7,7 @@
 
 <h2>新增員工</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(Html.BeginForm("Create", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" })))
 {
     @Html.AntiForgeryToken()
 

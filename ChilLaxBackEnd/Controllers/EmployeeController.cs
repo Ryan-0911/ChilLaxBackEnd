@@ -1,5 +1,7 @@
 ﻿using ChilLaxBackEnd.Models;
+using ChilLaxBackEnd.Models.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +12,11 @@ namespace ChilLaxBackEnd.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
+        ChilLaxEntities db = new ChilLaxEntities();
         public ActionResult Delete(int? id)
         {
             if (id != null)
             {
-                ChilLaxEntities db = new ChilLaxEntities();
                 Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == id);
                 if (emp != null)
                 {
@@ -24,33 +26,33 @@ namespace ChilLaxBackEnd.Controllers
             }
 
             return RedirectToAction("List");
+       
         }
 
         public ActionResult Edit(int? id)
         {
             if (id == null)
-                return RedirectToAction("List");
-            ChilLaxEntities db = new ChilLaxEntities();
+                return RedirectToAction("List");       
             Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == id);
-            return View(emp);
+            EmployeeViewModel evm = new EmployeeViewModel();
+            evm.empvm = emp;
+            return View(evm);
         }
 
         [HttpPost]
-        public ActionResult Edit(Employee x)
+        public ActionResult Edit(EmployeeViewModel evm)
         {
-            ChilLaxEntities db = new ChilLaxEntities();
-            Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == x.emp_id);
+            Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == evm.emp_id);
+
             if (emp != null)
             {
-                if (x.emp_permission.ToString() != null && x.emp_name != null && x.emp_account != null && x.emp_password != null)
+                if (evm.emp_permission.ToString() != null && evm.emp_name != null && evm.emp_account != null && evm.emp_password != null)
                 {
-
-                    emp.emp_permission = x.emp_permission;
-                    emp.emp_name = x.emp_name;
-                    emp.emp_account = x.emp_account;
-                    emp.emp_password = x.emp_password;
+                    emp.emp_permission = evm.emp_permission;
+                    emp.emp_name = evm.emp_name;
+                    emp.emp_account = evm.emp_account;
+                    emp.emp_password = evm.emp_password;
                     db.SaveChanges();
-
                 }
             }
             else
@@ -69,9 +71,14 @@ namespace ChilLaxBackEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Employee emp)
+        public ActionResult Create(EmployeeViewModel evm)
         {
-            ChilLaxEntities db = new ChilLaxEntities();
+            Employee emp = new Employee();
+            emp.emp_permission = evm.emp_permission;
+            emp.emp_name = evm.emp_name;
+            emp.emp_account = evm.emp_account;
+            emp.emp_password = evm.emp_password;
+
             db.Employee.Add(emp);
             db.SaveChanges();
             return RedirectToAction("List");
@@ -80,10 +87,22 @@ namespace ChilLaxBackEnd.Controllers
 
         public ActionResult List()
         {
-            ChilLaxEntities db = new ChilLaxEntities();
-            IEnumerable<Employee> datas = from e in db.Employee
+            List<EmployeeViewModel> viewModels = new List<EmployeeViewModel>();
+
+            IEnumerable<Employee> employees = from e in db.Employee
                                           select e;
-            return View(datas);
+
+            foreach (Employee employee in employees)
+            {
+                EmployeeViewModel viewModel = new EmployeeViewModel
+                {
+                    empvm= employee
+                };
+
+                viewModels.Add(viewModel);
+            }
+
+            return View(viewModels);
         }
     }
 }
