@@ -1,6 +1,8 @@
-﻿
+﻿@model List<ChilLaxBackEnd.Models.ViewModels.ModelChartJs>
 @{
     ViewBag.Title = "Index";
+    ViewBag.Title = "Chart";
+
 }
 
 
@@ -43,15 +45,16 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="text-muted">Total Revenue</h5>
-                            <div class="metric-value d-inline-block">
+                            <h5 class="text-muted">月營收</h5>
+                            @*<div class="metric-value d-inline-block">
                                 <h1 class="mb-1">$12099</h1>
                             </div>
                             <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                 <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                            </div>
+                            </div>*@
                         </div>
-                        <div id="sparkline-revenue"></div>
+                        <canvas id="chart"></canvas>
+                        @*<div id="sparkline-revenue"></div>*@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -639,3 +642,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    var chartData = @Html.Raw(Json.Encode(Model));
+
+    var ctx = document.getElementById('chart');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.map(data => data.OrderData),
+            datasets: [
+            //    {
+            //    label: 'Total',
+            //    data: chartData.map(data => data.Total),
+            //    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            //    borderColor: 'rgba(75, 192, 192, 1)',
+            //    borderWidth: 1
+            //},
+            {
+                label: '月營收',
+                data: chartData.map(data => data.Total),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                type: 'line'
+            }]
+        },
+    });
+</script>
