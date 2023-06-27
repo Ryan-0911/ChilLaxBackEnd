@@ -61,6 +61,17 @@ namespace ChilLaxBackEnd.Models.ViewModels
             set { _employee.emp_password = value; }
         }
 
+        [DisplayName("狀態")]
+        [Required(ErrorMessage = "狀態必須填寫")]
+        public bool available 
+        {
+            get { return _employee.available; }
+            set { _employee.available = value; }
+        }
+
+
+
+
         public Employee GetEmployee()
         {
             return _employee;

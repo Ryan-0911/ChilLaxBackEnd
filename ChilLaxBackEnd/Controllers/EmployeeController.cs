@@ -13,21 +13,21 @@ namespace ChilLaxBackEnd.Controllers
     {
         // GET: Employee
         ChilLaxEntities db = new ChilLaxEntities();
-        public ActionResult Delete(int? id)
-        {
-            if (id != null)
-            {
-                Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == id);
-                if (emp != null)
-                {
-                    db.Employee.Remove(emp);
-                    db.SaveChanges();
-                }
-            }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == id);
+        //        if (emp != null)
+        //        {
+        //            db.Employee.Remove(emp);
+        //            db.SaveChanges();
+        //        }
+        //    }
 
-            return RedirectToAction("List");
+        //    return RedirectToAction("List");
        
-        }
+        //}
 
         public ActionResult Edit(int? id)
         {
@@ -48,6 +48,7 @@ namespace ChilLaxBackEnd.Controllers
             {
                 if (evm.emp_permission.ToString() != null && evm.emp_name != null && evm.emp_account != null && evm.emp_password != null)
                 {
+                    emp.available = evm.available;
                     emp.emp_permission = evm.emp_permission;
                     emp.emp_name = evm.emp_name;
                     emp.emp_account = evm.emp_account;
@@ -74,6 +75,7 @@ namespace ChilLaxBackEnd.Controllers
         public ActionResult Create(EmployeeViewModel evm)
         {
             Employee emp = new Employee();
+            emp.available = evm.available;
             emp.emp_permission = evm.emp_permission;
             emp.emp_name = evm.emp_name;
             emp.emp_account = evm.emp_account;

@@ -12,23 +12,22 @@ namespace ChilLaxBackEnd.Controllers
     public class MemberController : Controller
     {
         // GET: Member
-        public ActionResult Delete(int? id)
-        {
-            if (id != null)
-            {
-                ChilLaxEntities db = new ChilLaxEntities();
-                Member member = db.Member.FirstOrDefault(m => m.member_id == id);
-                MemberCredential credential = db.MemberCredential.FirstOrDefault(mc => mc.member_id == id);
-                if (member != null && credential != null)
-                {
-                    db.Member.Remove(member);
-                    db.MemberCredential.Remove(credential);
-                    db.SaveChanges();
-                }
-            }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        ChilLaxEntities db = new ChilLaxEntities();
+        //        Member member = db.Member.FirstOrDefault(m => m.member_id == id);
+        //        MemberCredential credential = db.MemberCredential.FirstOrDefault(mc => mc.member_id == id);
+        //        if (member != null && credential != null)
+        //        {
+        //            member.available = false;
+        //            db.SaveChanges();
+        //        }
+        //    }
 
-            return RedirectToAction("List");
-        }
+        //    return RedirectToAction("List");
+        //}
 
 
         public ActionResult Edit(int? id)
@@ -57,6 +56,7 @@ namespace ChilLaxBackEnd.Controllers
             MemberViewModel mvm = new MemberViewModel
             {
                 member_id = member.member_id,
+                available = member.available,
                 member_account = credential.member_account,
                 member_name = member.member_name,
                 member_tel = member.member_tel,
@@ -85,6 +85,7 @@ namespace ChilLaxBackEnd.Controllers
                     if (ModelState.IsValid)
                     {
                         credential.member_account = mvm.member_account;
+                        member.available = mvm.available;
                         member.member_name = mvm.member_name;
                         member.member_tel = mvm.member_tel;
                         member.member_address = mvm.member_address;
@@ -125,25 +126,34 @@ namespace ChilLaxBackEnd.Controllers
         //    return RedirectToAction("List");
         //}
         public ActionResult List(MemberViewModel mvm)
-        {
+        {           
             ChilLaxEntities db = new ChilLaxEntities();
             Member member = db.Member.FirstOrDefault(m => m.member_id == mvm.member_id);
             MemberCredential credential = db.MemberCredential.FirstOrDefault(mc => mc.member_id == mvm.member_id);
+
+            //string strKeyword = Request.Form["txtKeyword"];
+            //string strSearch = Request.Form["sltKeyword"];
+            //var memberlist = new List<MemberViewModel>();
+            //ViewBag.Memberlist = memberlist;
+
+            //IEnumerable<MemberViewModel> datas = null;
             IEnumerable<MemberViewModel> datas = from m in db.Member
                                                  join mc in db.MemberCredential on m.member_id equals mc.member_id
                                                  select new MemberViewModel
                                                  {
-                                                     member_id = m.member_id,
-                                                     member_account = mc.member_account,
-                                                     member_name = m.member_name,
-                                                     member_tel = m.member_tel,
-                                                     member_address = m.member_address,
-                                                     member_email = m.member_email,
-                                                     member_sex = m.member_sex,
-                                                     member_birthday = m.member_birthday,
-                                                     member_point = m.member_point,
-                                                     member_joinTime = m.member_joinTime
+                                                    member_id = m.member_id,
+                                                    available = m.available,
+                                                    member_account = mc.member_account,
+                                                    member_name = m.member_name,
+                                                    member_tel = m.member_tel,
+                                                    member_address = m.member_address,
+                                                    member_email = m.member_email,
+                                                    member_sex = m.member_sex,
+                                                    member_birthday = m.member_birthday,
+                                                    member_point = m.member_point,
+                                                    member_joinTime = m.member_joinTime
                                                  };
+           
             return View(datas);
         }
 

@@ -7,20 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
-
 namespace ChilLaxBackEnd.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Employee
     {
         public int emp_id { get; set; }
@@ -28,8 +19,6 @@ namespace ChilLaxBackEnd.Models
         public string emp_name { get; set; }
         public string emp_account { get; set; }
         public string emp_password { get; set; }
-
-
-        
+        public bool available { get; set; }
     }
 }

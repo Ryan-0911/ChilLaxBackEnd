@@ -20,6 +20,21 @@
     <input type="hidden" name="emp_id" value="@Model.emp_id" />
 
     <div class="form-group">
+        @Html.LabelFor(model => model.available, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <label class="custom-control custom-radio custom-control-inline">
+                @Html.RadioButtonFor(model => model.available, true, new { @class = "custom-control-input" })
+                <span class="custom-control-label">在職</span>
+            </label>
+            <label class="custom-control custom-radio custom-control-inline">
+                @Html.RadioButtonFor(model => model.available, false, new { @class = "custom-control-input" })
+                <span class="custom-control-label">離職</span>
+            </label>
+            @Html.ValidationMessageFor(model => model.available, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.emp_permission, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <label class="custom-control custom-radio custom-control-inline">

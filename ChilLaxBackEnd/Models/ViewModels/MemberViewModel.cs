@@ -9,6 +9,10 @@ namespace ChilLaxBackEnd.ViewModel
 {
     public class MemberViewModel
     {
+        [DisplayName("狀態")]
+        [Required(ErrorMessage = "狀態必須填寫")]
+        public bool available { get; set; }
+
         [DisplayName("編號")]
         public int member_id { get; set; }
 
