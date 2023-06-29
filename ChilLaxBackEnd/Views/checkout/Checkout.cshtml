@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ChilLaxBackEnd.Models.ViewModels.CheckoutViewModel>
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>結帳</h2>
+
+@using (Html.BeginForm("AioCheckOut", "Cashier", FormMethod.Post, new { target = "_blank" }))
+{
+    @Html.HiddenFor(model => model.FirstOrDefault().MerchantID)
+    @Html.HiddenFor(model => model.FirstOrDefault().BackstageAccound)
+    @Html.HiddenFor(model => model.FirstOrDefault().BackstagePassword)
+    @Html.HiddenFor(model => model.FirstOrDefault().統一編號)
+    @Html.HiddenFor(model => model.FirstOrDefault().身分證末四碼)
+    @Html.HiddenFor(model => model.FirstOrDefault().HashKey)
+    @Html.HiddenFor(model => model.FirstOrDefault().HashIV)
+
+    <button type="submit" class="btn btn-info">結帳</button>
+}
