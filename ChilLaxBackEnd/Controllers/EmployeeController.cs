@@ -26,13 +26,13 @@ namespace ChilLaxBackEnd.Controllers
         //    }
 
         //    return RedirectToAction("List");
-       
+
         //}
 
         public ActionResult Edit(int? id)
         {
             if (id == null)
-                return RedirectToAction("List");       
+                return RedirectToAction("List");
             Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == id);
             EmployeeViewModel evm = new EmployeeViewModel();
             evm.empvm = emp;
@@ -92,13 +92,13 @@ namespace ChilLaxBackEnd.Controllers
             List<EmployeeViewModel> viewModels = new List<EmployeeViewModel>();
 
             IEnumerable<Employee> employees = from e in db.Employee
-                                          select e;
+                                              select e;
 
             foreach (Employee employee in employees)
             {
                 EmployeeViewModel viewModel = new EmployeeViewModel
                 {
-                    empvm= employee
+                    empvm = employee
                 };
 
                 viewModels.Add(viewModel);

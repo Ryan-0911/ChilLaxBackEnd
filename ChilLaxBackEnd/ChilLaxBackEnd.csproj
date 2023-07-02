@@ -670,9 +670,6 @@
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TarotCard.cs">
       <DependentUpon>ChilLaxModel.tt</DependentUpon>
     </Compile>

@@ -42,7 +42,6 @@ namespace ChilLaxBackEnd.Models
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseDetail> PurchaseDetail { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TarotCard> TarotCard { get; set; }
         public virtual DbSet<TarotOrder> TarotOrder { get; set; }
         public virtual DbSet<HomeVideo> HomeVideo { get; set; }

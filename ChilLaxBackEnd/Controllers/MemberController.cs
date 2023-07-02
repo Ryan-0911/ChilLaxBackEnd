@@ -97,7 +97,7 @@ namespace ChilLaxBackEnd.Controllers
 
                         db.SaveChanges();
                         return RedirectToAction("List");
-                    }                
+                    }
 
                     return RedirectToAction("Edit");
                 }
@@ -126,7 +126,7 @@ namespace ChilLaxBackEnd.Controllers
         //    return RedirectToAction("List");
         //}
         public ActionResult List(MemberViewModel mvm)
-        {           
+        {
             ChilLaxEntities db = new ChilLaxEntities();
             Member member = db.Member.FirstOrDefault(m => m.member_id == mvm.member_id);
             MemberCredential credential = db.MemberCredential.FirstOrDefault(mc => mc.member_id == mvm.member_id);
@@ -141,19 +141,19 @@ namespace ChilLaxBackEnd.Controllers
                                                  join mc in db.MemberCredential on m.member_id equals mc.member_id
                                                  select new MemberViewModel
                                                  {
-                                                    member_id = m.member_id,
-                                                    available = m.available,
-                                                    member_account = mc.member_account,
-                                                    member_name = m.member_name,
-                                                    member_tel = m.member_tel,
-                                                    member_address = m.member_address,
-                                                    member_email = m.member_email,
-                                                    member_sex = m.member_sex,
-                                                    member_birthday = m.member_birthday,
-                                                    member_point = m.member_point,
-                                                    member_joinTime = m.member_joinTime
+                                                     member_id = m.member_id,
+                                                     available = m.available,
+                                                     member_account = mc.member_account,
+                                                     member_name = m.member_name,
+                                                     member_tel = m.member_tel,
+                                                     member_address = m.member_address,
+                                                     member_email = m.member_email,
+                                                     member_sex = m.member_sex,
+                                                     member_birthday = m.member_birthday,
+                                                     member_point = m.member_point,
+                                                     member_joinTime = m.member_joinTime
                                                  };
-           
+
             return View(datas);
         }
 

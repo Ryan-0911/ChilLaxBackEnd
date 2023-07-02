@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="ChilLaxModel.Purchase" Width="1.5" PointX="3.75" PointY="21" IsExpanded="true" />
         <EntityTypeShape EntityType="ChilLaxModel.PurchaseDetail" Width="1.5" PointX="8" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ChilLaxModel.Supplier" Width="1.5" PointX="1.5" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChilLaxModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChilLaxModel.TarotCard" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChilLaxModel.TarotOrder" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
         <AssociationConnector Association="ChilLaxModel.FK_Cart_Member" ManuallyRouted="false" />
