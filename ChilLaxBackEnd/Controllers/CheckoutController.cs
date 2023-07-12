@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,53 +12,71 @@ namespace ChilLaxBackEnd.Controllers
     public class CheckoutController : Controller
     {
         // GET: Checkout
-        public ActionResult Checkout()
+        public ActionResult Index()
         {
-            List<CheckoutViewModel> test = new List<CheckoutViewModel>();
-            CheckoutViewModel item = new CheckoutViewModel();
-            item.MerchantID = 3002599;
-            item.BackstageAccound = "stagetest2";
-            item.BackstagePassword = "test1234";
-            //item.統一編號 = 00000000;
-            item.身分證末四碼 = 3609;
-            item.HashKey = "pwFHCqoQZGmho4w6";
-            item.HashIV = "EkRm7iFT261dpevs";
-            test.Add(item);
+            var orderId = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 20);
+            //需填入你的網址
+            var website = $"https://localhost:44385/";
+            var order = new Dictionary<string, string>
+            {
+                //綠界需要的參數
 
-            return View(test);
+                //訂單編號
+                { "MerchantTradeNo",  orderId},
+                //交易時間
+                { "MerchantTradeDate",  DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")},
+                //交易金額
+                { "TotalAmount",  "100"},
+                //交易描述
+                { "TradeDesc",  "無"},
+                //商品名稱
+                { "ItemName",  "測試商品"},
+                //付款完成通知回傳網址
+                { "ReturnURL",  $"{website}/api/Ecpay/AddPayInfo"},
+                //Client端回傳付款結果網址
+                { "OrderResultURL", $"{website}/Home/PayInfo/{orderId}"},
+                //Client端返回特店的按鈕連結
+                { "ClientRedirectURL",  $"{website}/Home/AccountInfo/{orderId}"},
+                //特店編號
+                { "MerchantID",  "2000132"},
+                //付款方式
+                { "IgnorePayment",  "GooglePay#WebATM#CVS#BARCODE"},
+                //交易類型
+                { "PaymentType",  "aio"},
+                //預設付款方式
+                { "ChoosePayment",  "ALL"},
+                //CheckMacValue加密類型
+                { "EncryptType",  "1"},
+            };
+            //檢查碼
+            order["CheckMacValue"] = GetCheckMacValue(order);
+            return View(order);
         }
-
-
-        //[HttpPost]
-        //public ActionResult ProcessCheckout(CheckoutViewModel model)
-        //{
-        //// 根據你的需求，處理結帳資料，例如驗證資料、計算金額等
-
-        //// 呼叫 ECPay 的 API，將資料傳送給 ECPay 進行結帳
-        //// 這裡使用 JavaScript 和 AJAX 技術呼叫 API
-        //// 請確保引入 jQuery 函式庫
-
-        //// 使用 AJAX 傳送 POST 請求到 ECPay 的 API
-        ////$.ajax({
-        ////    url: "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
-        ////    type: "POST",
-        ////    dataType: "html",
-        ////    data: model, // 將模型物件作為請求資料傳送給 API
-        ////    success: function(response) {
-        ////            // 處理 API 回傳的結果
-        ////            // 可以將回傳的 HTML 內容插入到頁面中，或者重新導向到回傳的 URL
-        ////            // 例如：
-        ////            // $('#result-container').html(response); // 將回傳的 HTML 內容插入到名為 "result-container" 的元素中
-        ////            // window.location.href = response; // 重新導向到回傳的 URL
-        ////        },
-        ////    error: function(xhr, status, error) {
-        ////            // 處理錯誤情況
-        ////            console.log(error);
-        ////        }
-        ////    });
-
-        ////    return RedirectToAction("Checkout");
-        //}
+        private string GetCheckMacValue(Dictionary<string, string> order)
+        {
+            var param = order.Keys.OrderBy(x => x).Select(key => key + "=" + order[key]).ToList();
+            var checkValue = string.Join("&", param);
+            //測試用的 HashKey
+            var hashKey = "5294y06JbISpM5x9";
+            //測試用的 HashIV
+            var HashIV = "v77hoKGq4kWxNNIS";
+            checkValue = $"HashKey={hashKey}" + "&" + checkValue + $"&HashIV={HashIV}";
+            checkValue = HttpUtility.UrlEncode(checkValue).ToLower();
+            checkValue = GetSHA256(checkValue);
+            return checkValue.ToUpper();
+        }
+        private string GetSHA256(string value)
+        {
+            var result = new StringBuilder();
+            var sha256 = SHA256Managed.Create();
+            var bts = Encoding.UTF8.GetBytes(value);
+            var hash = sha256.ComputeHash(bts);
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString("X2"));
+            }
+            return result.ToString();
+        }
     }
 
 }
