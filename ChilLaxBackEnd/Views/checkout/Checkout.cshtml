@@ -16,5 +16,34 @@
     @Html.HiddenFor(model => model.FirstOrDefault().HashKey)
     @Html.HiddenFor(model => model.FirstOrDefault().HashIV)
 
-    <button type="submit" class="btn btn-info">結帳</button>
+    <button type="submit" class="btn btn-info" onclick="結帳()">結帳</button>
 }
+
+<script>
+    $.ajax({
+    url: "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
+    type: "POST",
+    dataType: "html",
+        data: model[
+            MerchantID =@Html.HiddenFor(model => model.FirstOrDefault().MerchantID),
+            BackstageAccound = @Html.HiddenFor(model => model.FirstOrDefault().BackstageAccound),
+            BackstagePassword =   @Html.HiddenFor(model => model.FirstOrDefault().BackstagePassword),
+            統一編號 = @Html.HiddenFor(model => model.FirstOrDefault().統一編號),
+            身分證末四碼 =   @Html.HiddenFor(model => model.FirstOrDefault().身分證末四碼),
+            HashKey = @Html.HiddenFor(model => model.FirstOrDefault().HashKey),
+        HashIV = @Html.HiddenFor(model => model.FirstOrDefault().HashIV)
+    ],
+    success: function(response) {
+        // 處理 API 回傳的結果
+        // 可以將回傳的 HTML 內容插入到頁面中，或者重新導向到回傳的 URL
+        alert(response);
+
+        window.location.href = "@Url.Action("Checkout")"; // 重新導向到 Checkout 動作的 URL
+    },
+    error: function(xhr, status, error) {
+        // 處理錯誤情況
+        console.log(error);
+    }
+});
+
+</script>
