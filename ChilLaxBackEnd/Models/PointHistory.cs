@@ -14,7 +14,7 @@ namespace ChilLaxBackEnd.Models
     
     public partial class PointHistory
     {
-        public int point_detail_id { get; set; }
+        public string point_detail_id { get; set; }
         public int member_id { get; set; }
         public string modified_source { get; set; }
         public int modified_amount { get; set; }
