@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.WebRequestMethods;
 
 namespace ChilLaxBackEnd.Controllers
 {
@@ -16,7 +17,8 @@ namespace ChilLaxBackEnd.Controllers
         {
             var orderId = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 20);
             //需填入你的網址
-            var website = $"https://localhost:44385/";
+            string website = $"https://localhost:5000";
+            string ReturnAPI = $"http://yulin.win/api/Checkout/UpdatePaymentAsync";
             var order = new Dictionary<string, string>
             {
                 //綠界需要的參數
@@ -32,11 +34,11 @@ namespace ChilLaxBackEnd.Controllers
                 //商品名稱
                 { "ItemName",  "測試商品"},
                 //付款完成通知回傳網址
-                { "ReturnURL",  $"{website}/api/Ecpay/AddPayInfo"},
+                { "ReturnURL",  $"{ReturnAPI}"},
                 //Client端回傳付款結果網址
                 { "OrderResultURL", $"{website}/Home/PayInfo/{orderId}"},
                 //Client端返回特店的按鈕連結
-                { "ClientRedirectURL",  $"{website}/Home/AccountInfo/{orderId}"},
+                { "ClientRedirectURL",  $"{website}/Home/Index"},
                 //特店編號
                 { "MerchantID",  "2000132"},
                 //付款方式
