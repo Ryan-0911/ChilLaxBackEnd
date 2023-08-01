@@ -11,13 +11,11 @@ namespace ChilLaxBackEnd.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class OrderDetail
     {
         public int order_id { get; set; }
         public int product_id { get; set; }
-        [Display(Name ="數量")]
         public int cart_product_quantity { get; set; }
     
         public virtual ProductOrder ProductOrder { get; set; }

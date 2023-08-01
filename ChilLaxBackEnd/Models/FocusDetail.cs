@@ -14,7 +14,7 @@ namespace ChilLaxBackEnd.Models
     
     public partial class FocusDetail
     {
-        public int focus_detail_id { get; set; }
+        public string focus_detail_id { get; set; }
         public System.DateTime start_datetime { get; set; }
         public System.DateTime end_datetime { get; set; }
         public int duration { get; set; }

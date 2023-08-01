@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#影片及圖片不做GIT版控
-ChilLaxBackEnd/assets/audios
-ChilLaxBackEnd/assets/videos
 
 # User-specific files
 *.rsuser

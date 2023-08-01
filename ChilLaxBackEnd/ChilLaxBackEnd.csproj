@@ -51,6 +51,12 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -484,6 +490,7 @@
     <Content Include="assets\vendor\timeline\img\cd-icon-picture.svg" />
     <Content Include="assets\vendor\timeline\js\main.js" />
     <Content Include="assets\vendor\vector-map\jqvmap.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="documentation\css\32px.png" />
     <Content Include="documentation\css\bootstrap.min.css" />
@@ -498,15 +505,15 @@
     <Content Include="documentation\js\jstree.active.js" />
     <Content Include="documentation\js\jstree.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ChilLaxModel.Context.tt">
+    <Content Include="Models\ChilLax.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
-      <LastGenOutput>ChilLaxModel.Context.cs</LastGenOutput>
+      <LastGenOutput>ChilLax.Context.cs</LastGenOutput>
+      <DependentUpon>ChilLax.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\ChilLaxModel.tt">
+    <Content Include="Models\ChilLax.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
-      <LastGenOutput>ChilLaxModel.cs</LastGenOutput>
+      <DependentUpon>ChilLax.edmx</DependentUpon>
+      <LastGenOutput>ChilLax.cs</LastGenOutput>
     </Content>
     <Content Include="pages\404-page.html" />
     <Content Include="pages\accordions.html" />
@@ -566,6 +573,14 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ChilLax.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChilLax.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ChilLax.edmx.diagram">
+      <DependentUpon>ChilLax.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\fullstack133chillax - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -588,7 +603,6 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\FocusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomeVideoController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
@@ -596,95 +610,83 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Announcement.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CDictionary.cs" />
-    <Compile Include="Models\ChilLaxModel.Context.cs">
+    <Compile Include="Models\ChilLax.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ChilLaxModel.Context.tt</DependentUpon>
+      <DependentUpon>ChilLax.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChilLaxModel.cs">
+    <Compile Include="Models\ChilLax.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChilLaxModel.Designer.cs">
+    <Compile Include="Models\ChilLax.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
+      <DependentUpon>ChilLax.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelWrappers\AnnouncementWrapper.cs" />
     <Compile Include="Models\CustomerService.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FocusDetail.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FocusSlide.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelWrappers\FocusSlideWrapper.cs" />
-    <Compile Include="Models\HomeVideo.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelWrappers\HomeVideoWrapper.cs" />
     <Compile Include="Models\Member.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MemberCredential.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelWrappers\AnnouncementWrapper.cs" />
+    <Compile Include="Models\ModelWrappers\FocusSlideWrapper.cs" />
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PointHistory.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductOrder.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Purchase.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PurchaseDetail.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_get_announcement_by_date_Result.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TarotCard.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TarotOrder.cs">
-      <DependentUpon>ChilLaxModel.tt</DependentUpon>
+      <DependentUpon>ChilLax.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\CheckoutViewModel.cs" />
+    <Compile Include="Models\ViewModels\EmployeeViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\MemberViewModel.cs" />
     <Compile Include="Models\ViewModels\ModelChartJs.cs" />
     <Compile Include="Models\ViewModels\ProductOrderDetail.cs" />
+    <Compile Include="Models\ViewModels\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -726,13 +728,6 @@
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.ttf" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.woff" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernoted41d.eot" />
-    <EntityDeploy Include="Models\ChilLaxModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ChilLaxModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ChilLaxModel.edmx.diagram">
-      <DependentUpon>ChilLaxModel.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -751,9 +746,6 @@
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Views\HomeVideo\List.cshtml" />
-    <Content Include="Views\HomeVideo\Create.cshtml" />
-    <Content Include="Views\HomeVideo\Edit.cshtml" />
     <Content Include="Views\Member\Edit.cshtml" />
     <Content Include="Views\Member\List.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
@@ -767,9 +759,7 @@
     <Content Include="Views\Purchase\Index.cshtml" />
     <Content Include="Views\Purchase\Edit.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Purchase\ErrDevBar.cshtml" />
-    <Content Include="Views\checkout\Checkout.cshtml" />
-    <Content Include="Views\checkout\Index.cshtml" />
+    <Content Include="Views\CustomerService\Processed.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -820,7 +810,7 @@
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+      Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">

@@ -1,4 +1,5 @@
 ﻿using ChilLaxBackEnd.Models;
+using ChilLaxBackEnd.Models.ViewModels;
 using ChilLaxBackEnd.ViewModel;
 using System;
 using System.Collections;
@@ -22,9 +23,12 @@ namespace ChilLaxBackEnd.Controllers
         {
             ChilLaxEntities db = new ChilLaxEntities();
             Employee emp = new Employee();
+            EmployeeViewModel evm = new EmployeeViewModel();
+            evm.empvm = emp;
+
             if (vm.txtAccount != null && vm.txtPassword != null)
             {
-                if (emp.is驗證帳號與密碼(vm.txtAccount, vm.txtPassword))
+                if (evm.is驗證帳號與密碼(vm.txtAccount, vm.txtPassword))
                 {
                     Session[CDictionary.SK_IS_通過驗證] = true;
                     return RedirectToAction("Index", "Home");
@@ -34,9 +38,7 @@ namespace ChilLaxBackEnd.Controllers
                     ViewBag.ErrorMessage = "帳號或密碼錯誤";
                 }
             }
-           
             return View();
         }
-
     }
 }

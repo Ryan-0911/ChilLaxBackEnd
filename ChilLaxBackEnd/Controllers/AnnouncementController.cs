@@ -1,4 +1,5 @@
 ﻿using ChilLaxBackEnd.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -6,15 +7,18 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ChilLaxBackEnd.Controllers
 {
     public class AnnouncementController : Controller
     {
         ChilLaxEntities db = new ChilLaxEntities();
+        int pageSize = 3;
         // GET: Announcement
-        public ActionResult List(DateTime? start = null, DateTime? end = null)
+        public ActionResult List(DateTime? start = null, DateTime? end = null, int page = 1)
         {
+            int currentPage = page < 1 ? 1 : page;
             var data = db.Announcement.Select(anmt => anmt).OrderBy(anmt => anmt.start_date).ThenBy(anmt => anmt.end_date).ToList();
             List<AnnouncementWrapper> list = new List<AnnouncementWrapper>();
             foreach (Announcement item in data)
@@ -29,7 +33,8 @@ namespace ChilLaxBackEnd.Controllers
 
             if (string.IsNullOrEmpty(start.ToString()) && string.IsNullOrEmpty(end.ToString()))
             {
-                return View(list);
+                var result = list.ToPagedList(currentPage, pageSize);
+                return View(result);
             }
 
             else 
@@ -45,7 +50,8 @@ namespace ChilLaxBackEnd.Controllers
 
                     SearchList.Add(SearchAnmt);
                 }
-                return View(SearchList);
+                var result = SearchList.ToPagedList(currentPage, pageSize);
+                return View(result);
             }
         }
 
