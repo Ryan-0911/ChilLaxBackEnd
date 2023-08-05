@@ -14,7 +14,7 @@ namespace ChilLaxBackEnd.Models
     
     public partial class TarotOrder
     {
-        public int tarot_order_id { get; set; }
+        public string tarot_order_id { get; set; }
         public int member_id { get; set; }
         public string card_result { get; set; }
         public string divination_chat { get; set; }
