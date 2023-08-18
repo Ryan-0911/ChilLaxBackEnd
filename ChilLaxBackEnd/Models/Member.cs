@@ -34,6 +34,9 @@ namespace ChilLaxBackEnd.Models
         public Nullable<int> member_point { get; set; }
         public System.DateTime member_joinTime { get; set; }
         public bool available { get; set; }
+        public string Provider { get; set; }
+        public string ProviderUserId { get; set; }
+        public Nullable<bool> IsValid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }

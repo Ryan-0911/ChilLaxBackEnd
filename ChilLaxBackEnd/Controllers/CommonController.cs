@@ -38,9 +38,7 @@ namespace ChilLaxBackEnd.Controllers
                     ViewBag.ErrorMessage = "帳號或密碼錯誤";
                 }
             }
-           
             return View();
         }
-
     }
 }

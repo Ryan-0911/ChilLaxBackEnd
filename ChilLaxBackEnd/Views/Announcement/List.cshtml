@@ -1,8 +1,13 @@
-﻿@model IEnumerable<ChilLaxBackEnd.Models.AnnouncementWrapper>
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model  IPagedList<ChilLaxBackEnd.Models.AnnouncementWrapper>
 
 @{
     ViewBag.Title = "List";
 }
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 <h2>公告管理</h2>
 
@@ -57,19 +62,19 @@ else if (TempData["ErrorMessage"] != null)
             <b>No.</b>
         </th>
         <th>
-            <b>@Html.DisplayNameFor(model => model.announcement)</b>
+            <b>@Html.DisplayNameFor(model => model.FirstOrDefault().announcement)</b>
         </th>
         <th>
-            <b>@Html.DisplayNameFor(model => model.start_date)</b>
+            <b>@Html.DisplayNameFor(model => model.FirstOrDefault().start_date)</b>
         </th>
         <th>
-            <b>@Html.DisplayNameFor(model => model.end_date)</b>
+            <b>@Html.DisplayNameFor(model => model.FirstOrDefault().end_date)</b>
         </th>
         <th>
-            <b>@Html.DisplayNameFor(model => model.bonus_for_focus)</b>
+            <b>@Html.DisplayNameFor(model => model.FirstOrDefault().bonus_for_focus)</b>
         </th>
         <th>
-            <b>@Html.DisplayNameFor(model => model.bonus_for_shopping)</b>
+            <b>@Html.DisplayNameFor(model => model.FirstOrDefault().bonus_for_shopping)</b>
         </th>
         <th>
             <b>編輯</b>
@@ -106,3 +111,5 @@ else if (TempData["ErrorMessage"] != null)
         }
     }
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("List", new {page})) 

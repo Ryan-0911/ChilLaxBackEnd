@@ -1,4 +1,5 @@
 ﻿using ChilLaxBackEnd.Models;
+using ChilLaxBackEnd.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -34,17 +35,24 @@ namespace ChilLaxBackEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product t)
+        public ActionResult Create(ProductViewModel pvm)
         {
             ChilLaxEntities db = new ChilLaxEntities();
- 
-            if (t.photo != null)
+            Product prod = new Product();
+            if (pvm.photo != null)
             {
                 string photoName = Guid.NewGuid().ToString() + ".jpg";
-                t.photo.SaveAs(Server.MapPath("~/assets/images/" + photoName));
-                t.product_img = photoName;
+                pvm.photo.SaveAs(Server.MapPath("~/assets/images/" + photoName));
+                prod.product_img = photoName;
             }
-            db.Product.Add(t);
+            prod.supplier_id = pvm.supplier_id;
+            prod.product_name = pvm.product_name;
+            prod.product_desc = pvm.product_desc;
+            prod.product_price = pvm.product_price;
+            prod.product_quantity = pvm.product_quantity;
+            prod.product_category = pvm.product_category;
+            prod.product_state = pvm.product_state;
+            db.Product.Add(prod);
             db.SaveChanges();
             return RedirectToAction("List");
         }
@@ -75,27 +83,27 @@ namespace ChilLaxBackEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product x)
+        public ActionResult Edit(ProductViewModel pvm)
         {
             ChilLaxEntities db = new ChilLaxEntities();
-            Product prod = db.Product.FirstOrDefault(p => p.product_id == x.product_id);
+            Product prod = db.Product.FirstOrDefault(p => p.product_id == pvm.product_id);
             if (prod != null)
             {
-                if (x.photo != null)
+                if (pvm.photo != null)
                 {
                     System.IO.File.Delete(Server.MapPath("~/assets/images/" + prod.product_img));
                     string photoName = Guid.NewGuid().ToString() + ".jpg";
-                    x.photo.SaveAs(Server.MapPath("~/assets/images/" + photoName));
+                    pvm.photo.SaveAs(Server.MapPath("~/assets/images/" + photoName));
                     prod.product_img = photoName;
 
                 }
-                prod.supplier_id = x.supplier_id;
-                prod.product_name = x.product_name;
-                prod.product_desc = x.product_desc;
-                prod.product_price = x.product_price;
-                prod.product_quantity = x.product_quantity;
-                prod.product_category = x.product_category;
-                prod.product_state = x.product_state;
+                prod.supplier_id = pvm.supplier_id;
+                prod.product_name = pvm.product_name;
+                prod.product_desc = pvm.product_desc;
+                prod.product_price = pvm.product_price;
+                prod.product_quantity = pvm.product_quantity;
+                prod.product_category = pvm.product_category;
+                prod.product_state = pvm.product_state;
                 db.SaveChanges();
             }
             return RedirectToAction("List");
