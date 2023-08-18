@@ -12,22 +12,22 @@ namespace ChilLaxBackEnd.Controllers
     public class MemberController : Controller
     {
         // GET: Member
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id != null)
-        //    {
-        //        ChilLaxEntities db = new ChilLaxEntities();
-        //        Member member = db.Member.FirstOrDefault(m => m.member_id == id);
-        //        MemberCredential credential = db.MemberCredential.FirstOrDefault(mc => mc.member_id == id);
-        //        if (member != null && credential != null)
-        //        {
-        //            member.available = false;
-        //            db.SaveChanges();
-        //        }
-        //    }
+        public ActionResult Delete(int? id)
+        {
+            if (id != null)
+            {
+                ChilLaxEntities db = new ChilLaxEntities();
+                Member member = db.Member.FirstOrDefault(m => m.member_id == id);
+                MemberCredential credential = db.MemberCredential.FirstOrDefault(mc => mc.member_id == id);
+                if (member != null && credential != null)
+                {
+                    member.available = false;
+                    db.SaveChanges();
+                }
+            }
 
-        //    return RedirectToAction("List");
-        //}
+            return RedirectToAction("List");
+        }
 
 
         public ActionResult Edit(int? id)

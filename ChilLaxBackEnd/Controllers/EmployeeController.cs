@@ -13,21 +13,6 @@ namespace ChilLaxBackEnd.Controllers
     {
         // GET: Employee
         ChilLaxEntities db = new ChilLaxEntities();
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id != null)
-        //    {
-        //        Employee emp = db.Employee.FirstOrDefault(e => e.emp_id == id);
-        //        if (emp != null)
-        //        {
-        //            db.Employee.Remove(emp);
-        //            db.SaveChanges();
-        //        }
-        //    }
-
-        //    return RedirectToAction("List");
-
-        //}
 
         public ActionResult Edit(int? id)
         {
